@@ -1,2 +1,2 @@
 run-demo:
-	poetry run scrapy crawl demospider -O output.json
+	poetry run scrapy crawl demospider

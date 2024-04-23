@@ -7,7 +7,12 @@ class DemoSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for content in response.css("div.inner-content p"):
-            yield {
-                "text": html.remove_tags(content.get())
-            }
+        with open("output.txt", "w+") as file:
+            for content in response.css("div.inner-content p"):
+                content = html.remove_tags(content.get())
+                content = html.replace_escape_chars(content)
+                content = html.remove_comments(content)
+                content = html.replace_entities(content)
+
+                file.write(content + '\n')
+
